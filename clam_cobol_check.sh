@@ -1,8 +1,8 @@
 script name:
-uw_clam_cobol_check.sh 
+clam_cobol_check.sh 
 #!/bin/bash
 
-LOG=/tmp/uwclamcheck.log
+LOG=/tmp/clamcheck.log
 TIME=$(date +"%T")
 TESTFILE=/software/xxx/clamtest.txt
 HOSTNAME=`hostname`
@@ -42,8 +42,7 @@ else
         systemctl start clamd@scan &
         MSGTEXT="${TIME}: Clam service was down. Started it up."
         echo ${MSGTEXT} >> ${LOG}
-        echo ${MSGTEXT} | /bin/mailx -v -s "${HOSTNAME}: Clam service restarted" -r "xxx@u
-waterloo.ca" "${EMAILADDR}"
+        echo ${MSGTEXT} | /bin/mailx -v -s "${HOSTNAME}: Clam service restarted" -r "xxx@gmail.ca" "${EMAILADDR}"
         STATUS=1
 
 fi
@@ -79,5 +78,6 @@ cd /xxx
 CORECOUNT=`ls -l core.* | wc -l`
 printf "\nRemoving ${CORECOUNT} core dumps from DOMAIN..." >> ${LOG}
 rm -f core.*
+
 
 exit ${STATUS}
